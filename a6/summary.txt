@@ -1,0 +1,49 @@
+(Fill out this file with brief answers.)
+
+Name(s) and NetID(s) of group members: Lucas Casas (lcc79)
+
+Time spent on the assignment, in hours: 25
+
+Implementation strategy:
+    Step 1-3 were quite simple and fluid. In Seek(), I initially used a DFS algorithm, but then
+    updated a seek2() method which had the same approach, but sorted each neighbor by distance to
+    ring. This way, It would limit backtracking as the neighbor closest to the ring would be tried
+    first.
+
+    For scram, I spent the majority of the time on. Initially, I made a simple scram1() that took
+    10 minutes that would just make a path that would add all the highest value coins using a
+    priority queue, and just go through as many as possible given steps remaining.
+
+    To optimize, I then further refined scram1() and decided to make a CoinTree class that I would
+    build a tree on EVERY coin, adding a child on EVERY coin. This was highly inefficient,
+    where I spent hours trying to get it to run.
+    I learned a lot during this process. I worked on memoization with my PathLength() method, but
+    nonetheless it was so inefficient there was no way to build a tree on every single coin with
+    the depth of reaching every coin thereafter recursively and summing all paths.
+    I watched plenty of chess AI videos as it was similar, so then tried to implement a MaxDepth
+    feature to limit how deep the recursion went. This is when I noticed I had multiple functions
+    that were all so inefficient I had to scrap the entire idea.
+    Thus, that is why I only have scram1() to show for and no other method like scram2().
+
+    I then went the easier and less ambitious route of just using a ratio of value and distance
+    for every coin and making a PQueue of all ratios from each coin to just go through a path with
+    the highest ratios.
+
+Testing strategy:
+    I added one test that would test Dijstras algorithm on disconnected graphs.
+    My second test was more complex and tested for the issues of a new shortest path being discovered
+    given a node that was already discovered serves as a new node in that path. This test
+    confirms that the shortest path is able to change when a new shortest path is found.
+
+Known problems:
+    Everything works fine now. In my seek() There is still an issue with sometimes if McDiver is
+    blocked by a wall on the same x or y value as the ring, it may lead to him going through a long
+    path that is a deadend. This could be solved by adding a list of the last 2-3 visited nodes and
+    if after first move he keeps getting farther and farther, backtracking back and going opposite
+    way. But considering I still get 20000+ on my average of 30 runs, I decided to leave it as
+    it was still working fine generally.
+
+Comments on the assignment:
+    I really enjoyed the competitive aspect of this assignment. Had it not been during finals, it
+    would have been so amazing to work longer on this to try to actually get a competitive scores.
+    I wish more assignments had competitions as such!
